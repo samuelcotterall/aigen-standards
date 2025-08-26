@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { performance } from 'perf_hooks';
+import matter from 'gray-matter';
 
 const root = process.cwd();
 const docsRoot = path.join(root, 'docs');
@@ -19,35 +20,12 @@ function walk(dir: string): string[] {
 }
 
 function parseFrontmatter(content: string): Record<string, unknown> | null {
-  const m = content.match(/^---\s*[\r\n]+([\s\S]*?)\r?\n---/);
-  if (!m) return null;
-  const yaml = m[1];
-  const data: Record<string, unknown> = {};
-  for (const line of yaml.split(/\r?\n/)) {
-    const idx = line.indexOf(':');
-    if (idx === -1) continue;
-    const key = line.slice(0, idx).trim();
-    const raw = line.slice(idx + 1).trim();
-    let val: string | string[] = raw;
-    if ((raw.startsWith('"') && raw.endsWith('"')) || (raw.startsWith("'") && raw.endsWith("'"))) {
-      val = raw.slice(1, -1);
-    }
-    if (typeof val === 'string' && val.startsWith('[') && val.endsWith(']')) {
-      try {
-        const parsed = JSON.parse(val.replace(/'/g, '"')) as string[];
-        val = parsed;
-      } catch (e) {
-        const inner = (val as string).slice(1, -1);
-        const parsed = inner
-          .split(',')
-          .map((s: string) => s.trim().replace(/^"|"$/g, ''))
-          .filter(Boolean);
-        val = parsed;
-      }
-    }
-    data[key] = val;
+  try {
+    const parsed = matter(content);
+    return parsed.data as Record<string, unknown>;
+  } catch {
+    return null;
   }
-  return data;
 }
 
 if (!fs.existsSync(docsRoot) || !fs.statSync(docsRoot).isDirectory()) {

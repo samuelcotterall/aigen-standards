@@ -1,10 +1,13 @@
 ---
 id: dates-md
-title: "Dates (date-fns / dayjs) — Conventions & Examples"
+title: Dates (date-fns / dayjs) — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Dates (date-fns / dayjs) — Conventions & Examples
 

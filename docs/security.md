@@ -1,10 +1,15 @@
 ---
 id: security-md
-title: "Security — Web App Conventions"
+title: Security — Web App Conventions
 topics: []
 scope: []
-version: "any"
-sections: [core-areas, conventions, patterns, checklist]
+version: any
+sections:
+  - core-areas
+  - conventions
+  - patterns
+  - checklist
+toolingLinks: {}
 ---
 # Security — Web App Conventions
 

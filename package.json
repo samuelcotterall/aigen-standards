@@ -9,6 +9,9 @@
     "docs:build-index": "node dist/scripts/build-docs-index.js",
     "docs:extract": "node dist/scripts/extract-section.js",
     "docs:check-toc": "node dist/scripts/check-toc.js",
+  "docs:normalize-frontmatter": "ts-node src/scripts/normalize-frontmatter.ts",
+  "docs:add-links": "node dist/scripts/add-links.js",
+  "docs:check-links": "node dist/scripts/check-links.js",
     "dev:extract": "ts-node src/scripts/extract-section.ts",
     "test": "vitest"
   },
