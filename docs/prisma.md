@@ -1,10 +1,13 @@
 ---
 id: prisma-md
-title: "Prisma — Conventions & Examples"
+title: Prisma — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Prisma — Conventions & Examples
 

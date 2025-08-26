@@ -1,10 +1,13 @@
 ---
 id: trpc-md
-title: "tRPC — Conventions & Examples"
+title: tRPC — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # tRPC — Conventions & Examples
 

@@ -1,10 +1,18 @@
 ---
 id: uploads-md
-title: "Uploads (S3 / UploadThing / Uppy) — Conventions & Patterns"
+title: Uploads (S3 / UploadThing / Uppy) — Conventions & Patterns
 topics: []
 scope: []
-version: "any"
-sections: [golden-rules, s3-style-presigned-upload-direct-to-bucket-, uploadthing, uppy-tus-multipart-, security-compliance, a11y-ux, checklist]
+version: any
+sections:
+  - golden-rules
+  - s3-style-presigned-upload-direct-to-bucket-
+  - uploadthing
+  - uppy-tus-multipart-
+  - security-compliance
+  - a11y-ux
+  - checklist
+toolingLinks: {}
 ---
 # Uploads (S3 / UploadThing / Uppy) — Conventions & Patterns
 

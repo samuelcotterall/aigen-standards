@@ -1,10 +1,13 @@
 ---
 id: react-aria-md
-title: "React Aria / React Spectrum — Conventions & Examples"
+title: React Aria / React Spectrum — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # React Aria / React Spectrum — Conventions & Examples
 

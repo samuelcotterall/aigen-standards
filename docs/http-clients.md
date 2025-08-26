@@ -1,10 +1,13 @@
 ---
 id: http-clients-md
-title: "HTTP Clients (Axios / ky) — Conventions & Examples"
+title: HTTP Clients (Axios / ky) — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # HTTP Clients (Axios / ky) — Conventions & Examples
 

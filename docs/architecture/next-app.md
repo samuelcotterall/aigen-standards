@@ -1,10 +1,18 @@
 ---
 id: architecture-next-app
 title: Architecture — Next.js App Router
-topics: [architecture]
-scope: [next, app-router]
+topics:
+  - architecture
+scope:
+  - next
+  - app-router
 version: '>=13'
-sections: [structure, boundaries, server-client-split]
+sections:
+  - structure
+  - boundaries
+  - server-client-split
+toolingLinks:
+  next: 'https://nextjs.org/docs'
 ---
 
 # Architecture — Next.js (App Router)

@@ -1,10 +1,16 @@
 ---
 id: performance-md
-title: "Performance — React/Next/Vite"
+title: Performance — React/Next/Vite
 topics: []
 scope: []
-version: "any"
-sections: [goals, conventions, patterns, diagnostics, checklist]
+version: any
+sections:
+  - goals
+  - conventions
+  - patterns
+  - diagnostics
+  - checklist
+toolingLinks: {}
 ---
 # Performance — React/Next/Vite
 

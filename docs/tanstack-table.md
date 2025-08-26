@@ -1,10 +1,13 @@
 ---
 id: tanstack-table-md
-title: "TanStack Table — Conventions & Examples"
+title: TanStack Table — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # TanStack Table — Conventions & Examples
 

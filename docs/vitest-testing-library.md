@@ -1,10 +1,13 @@
 ---
 id: vitest-testing-library-md
-title: "Vitest + Testing Library — Conventions & Examples"
+title: Vitest + Testing Library — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Vitest + Testing Library — Conventions & Examples
 

@@ -1,5 +1,15 @@
 [
   {
+    "file": "docs/README.md",
+    "id": "README",
+    "title": "README",
+    "topics": [],
+    "scope": [],
+    "version": "any",
+    "sections": [],
+    "toolingLinks": {}
+  },
+  {
     "file": "docs/accessibility.md",
     "id": "accessibility-md",
     "title": "Accessibility — A11y Conventions for React/Next",
@@ -11,7 +21,8 @@
       "conventions",
       "patterns",
       "checklist"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/architecture.md",
@@ -26,7 +37,8 @@
       "conventions",
       "boundaries",
       "checklist"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/architecture/next-app.md",
@@ -44,7 +56,10 @@
       "structure",
       "boundaries",
       "server-client-split"
-    ]
+    ],
+    "toolingLinks": {
+      "next": "https://nextjs.org/docs"
+    }
   },
   {
     "file": "docs/architecture/next-pages.md",
@@ -61,7 +76,10 @@
     "sections": [
       "structure",
       "boundaries"
-    ]
+    ],
+    "toolingLinks": {
+      "next": "https://nextjs.org/docs"
+    }
   },
   {
     "file": "docs/architecture/vite.md",
@@ -78,7 +96,11 @@
     "sections": [
       "structure",
       "boundaries"
-    ]
+    ],
+    "toolingLinks": {
+      "vite": "https://vitejs.dev/guide/",
+      "react": "https://react.dev"
+    }
   },
   {
     "file": "docs/charts.md",
@@ -90,7 +112,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/core.md",
@@ -130,7 +153,8 @@
       "shadcn-ui",
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/dates.md",
@@ -142,7 +166,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/drizzle.md",
@@ -154,7 +179,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/http-clients.md",
@@ -166,7 +192,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/i18n.md",
@@ -178,7 +205,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/jotai.md",
@@ -190,7 +218,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/nextauth.md",
@@ -202,7 +231,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/nextjs.md",
@@ -214,7 +244,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/performance.md",
@@ -229,7 +260,8 @@
       "patterns",
       "diagnostics",
       "checklist"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/playwright.md",
@@ -241,7 +273,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/prisma.md",
@@ -253,7 +286,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/radix-ui.md",
@@ -265,7 +299,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/react-aria.md",
@@ -277,7 +312,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/react-router.md",
@@ -291,7 +327,20 @@
       "vite"
     ],
     "version": ">=6.4",
-    "sections": []
+    "sections": [
+      "conventions",
+      "examples",
+      "golden-rules",
+      "route-module-anatomy",
+      "router-setup",
+      "patterns",
+      "gotchas",
+      "references"
+    ],
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/redux-toolkit.md",
@@ -303,7 +352,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/security.md",
@@ -317,7 +367,8 @@
       "conventions",
       "patterns",
       "checklist"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/storybook.md",
@@ -329,7 +380,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/stripe.md",
@@ -341,7 +393,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/supabase.md",
@@ -353,7 +406,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/tailwind.md",
@@ -370,7 +424,12 @@
     "version": "index",
     "sections": [
       "index"
-    ]
+    ],
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tailwind/3.md",
@@ -389,7 +448,12 @@
       "conventions",
       "examples",
       "migration"
-    ]
+    ],
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tailwind/4.md",
@@ -408,7 +472,12 @@
       "conventions",
       "examples",
       "migration"
-    ]
+    ],
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tanstack-table.md",
@@ -420,7 +489,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/trpc.md",
@@ -432,7 +502,8 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/uploads.md",
@@ -449,7 +520,8 @@
       "security-compliance",
       "a11y-ux",
       "checklist"
-    ]
+    ],
+    "toolingLinks": {}
   },
   {
     "file": "docs/vitest-testing-library.md",
@@ -461,6 +533,7 @@
     "sections": [
       "conventions",
       "examples"
-    ]
+    ],
+    "toolingLinks": {}
   }
 ]

@@ -1,10 +1,13 @@
 ---
 id: drizzle-md
-title: "Drizzle (SQL) — Conventions & Examples"
+title: Drizzle (SQL) — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Drizzle (SQL) — Conventions & Examples
 

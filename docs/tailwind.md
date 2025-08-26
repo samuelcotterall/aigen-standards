@@ -1,10 +1,19 @@
 ---
 id: tailwind
 title: Tailwind CSS
-topics: [styling]
-scope: [react, next, vite]
-version: 'index'
-sections: [index]
+topics:
+  - styling
+scope:
+  - react
+  - next
+  - vite
+version: index
+sections:
+  - index
+toolingLinks:
+  react: 'https://react.dev'
+  next: 'https://nextjs.org/docs'
+  vite: 'https://vitejs.dev/guide/'
 ---
 
 # Tailwind CSS — Index
