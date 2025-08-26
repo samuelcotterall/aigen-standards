@@ -1,10 +1,13 @@
 ---
 id: stripe-md
-title: "Stripe (JS/React) — Conventions & Examples"
+title: Stripe (JS/React) — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Stripe (JS/React) — Conventions & Examples
 

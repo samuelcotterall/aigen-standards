@@ -1,10 +1,16 @@
 ---
 id: architecture-md
-title: "Architecture — Project Structure & Boundaries"
+title: Architecture — Project Structure & Boundaries
 topics: []
 scope: []
-version: "any"
-sections: [goals, recommended-structure, conventions, boundaries, checklist]
+version: any
+sections:
+  - goals
+  - recommended-structure
+  - conventions
+  - boundaries
+  - checklist
+toolingLinks: {}
 ---
 # Architecture — Project Structure & Boundaries
 

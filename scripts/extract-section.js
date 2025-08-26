@@ -2,6 +2,8 @@
 const { readFileSync, readdirSync, statSync } = require('fs');
 const { join, extname } = require('path');
 const semver = require('semver');
+const { performance } = require('perf_hooks');
+const Fuse = require('fuse.js');
 
 function walk(dir) {
   const out = [];
@@ -102,6 +104,19 @@ const root = process.cwd();
 const docsRoot = join(root, 'docs');
 const files = walk(docsRoot);
 
+function buildIndexForFuzzy() {
+  const entries = [];
+  for (const f of files) {
+    try {
+      const content = readFileSync(f, 'utf8');
+      const { data } = parseFrontmatter(content);
+      if (data && (data.id || data.title))
+        entries.push({ id: String(data.id || ''), title: String(data.title || ''), file: f });
+    } catch {}
+  }
+  return entries;
+}
+
 function pickFile() {
   // id match from frontmatter or filename
   for (const f of files) {
@@ -122,9 +137,23 @@ function pickFile() {
   return null;
 }
 
+const benchStart = performance.now();
 const file = pickFile();
 if (!file) {
   console.error('Doc not found for', idOrFile);
+  // provide fuzzy suggestions
+  try {
+    const idx = buildIndexForFuzzy();
+    const fuse = new Fuse(idx, { keys: ['id', 'title'], includeScore: true, threshold: 0.4 });
+    const raw = fuse.search(idOrFile).slice(0, 5);
+    const results = raw.map((r) => ({ id: r.item.id, title: r.item.title }));
+    if (results.length) {
+      console.error('Did you mean:');
+      for (const r of results) console.error(`  - ${r.id}  — ${r.title}`);
+    }
+  } catch (e) {
+    if (process.env.EXTRACT_DEBUG === '1') console.error('fuzzy error', e.message);
+  }
   process.exit(2);
 }
 
@@ -154,4 +183,6 @@ for (let i = start; i < lines.length; i++) {
     break;
   }
 }
+const elapsed = Math.round(performance.now() - benchStart);
 console.log(lines.slice(start, end).join('\n').trim());
+console.error(`extract-section: elapsed ${elapsed}ms`);

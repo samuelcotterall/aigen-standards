@@ -1,10 +1,13 @@
 ---
 id: nextjs-md
-title: 'Next.js (App Router) — Conventions & Examples'
+title: Next.js (App Router) — Conventions & Examples
 topics: []
 scope: []
-version: 'any'
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 
 # Next.js (App Router) — Conventions & Examples

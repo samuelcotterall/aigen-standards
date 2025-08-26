@@ -1,10 +1,13 @@
 ---
 id: playwright-md
-title: "Playwright — Conventions & Examples"
+title: Playwright — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Playwright — Conventions & Examples
 

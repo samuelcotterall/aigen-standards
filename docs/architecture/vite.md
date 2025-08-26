@@ -1,10 +1,16 @@
 ---
 id: architecture-vite
 title: Architecture — Vite + React Router
-topics: [architecture]
-scope: [vite, react]
-version: 'any'
-sections: [structure, boundaries]
+topics:
+  - architecture
+scope:
+  - vite
+  - react
+version: any
+sections:
+  - structure
+  - boundaries
+toolingLinks: {}
 ---
 
 # Architecture — Vite + React Router
