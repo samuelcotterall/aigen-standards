@@ -2,6 +2,7 @@
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, extname } from 'path';
 import semver from 'semver';
+import { fetchAndCacheDoc } from '../utils/fetchDoc';
 
 function walk(dir: string): string[] {
   const out: string[] = [];
@@ -53,14 +54,18 @@ for (const a of argv) {
   if (a.startsWith('--scope=')) scope = a.substring(a.indexOf('=') + 1);
 }
 if (!idOrFile) {
-  console.error('Usage: node scripts/extract-section.js <section> <id-or-file> [scope] [--version=range]');
+  console.error(
+    'Usage: node scripts/extract-section.js <section> <id-or-file> [scope] [--version=range]'
+  );
   process.exit(1);
 }
 
 function semverSatisfies(docVersion: any, range?: string | null): boolean {
   if (!range) return true;
   if (!docVersion) return false;
-  const dv = String(docVersion).replace(/^\s*['"]?|['"]?\s*$/g, '').trim();
+  const dv = String(docVersion)
+    .replace(/^\s*['"]?|['"]?\s*$/g, '')
+    .trim();
   const r = String(range).trim();
   if (dv === 'any' || dv === 'index') return true;
   const looksLikeRange = /[\^~<>\-\s]/.test(dv) || dv.includes('x');
@@ -70,7 +75,8 @@ function semverSatisfies(docVersion: any, range?: string | null): boolean {
     if (looksLikeRange) {
       const dvRange = dv.replace(/(\d+)\.x/g, '$1.0.0');
       const res = semver.intersects(dvRange, rangeNorm, { includePrerelease: true });
-      if (process.env.EXTRACT_DEBUG === '1') console.error('semver check', { dv, r, dvRange, rangeNorm, res });
+      if (process.env.EXTRACT_DEBUG === '1')
+        console.error('semver check', { dv, r, dvRange, rangeNorm, res });
       return res;
     }
     const coerced = semver.coerce(dv.replace(/\.x$/, '.0'));
@@ -79,10 +85,12 @@ function semverSatisfies(docVersion: any, range?: string | null): boolean {
       return dv.includes(r) || r.includes(dv);
     }
     const res = semver.satisfies(String(coerced), rangeNorm, { includePrerelease: true });
-    if (process.env.EXTRACT_DEBUG === '1') console.error('semver check single', { dv, r, coerced: String(coerced), rangeNorm, res });
+    if (process.env.EXTRACT_DEBUG === '1')
+      console.error('semver check single', { dv, r, coerced: String(coerced), rangeNorm, res });
     return res;
   } catch (e) {
-    if (process.env.EXTRACT_DEBUG === '1') console.error('semver error', (e as Error).message, { dv, r });
+    if (process.env.EXTRACT_DEBUG === '1')
+      console.error('semver error', (e as Error).message, { dv, r });
     return dv.includes(r) || r.includes(dv);
   }
 }
@@ -96,8 +104,10 @@ function pickFile(): string | null {
     const content = readFileSync(f, 'utf8');
     const { data } = parseFrontmatter(content);
     if (data.id === idOrFile || f.endsWith(`/${idOrFile}.md`) || f.endsWith(idOrFile)) {
-      if (data.version && typeof data.version === 'string') data.version = data.version.replace(/^\s*['"]|['"]\s*$/g, '').trim();
-      if (data.scope && typeof data.scope === 'string') data.scope = data.scope.replace(/^\s*\[|\]\s*$/g, '');
+      if (data.version && typeof data.version === 'string')
+        data.version = data.version.replace(/^\s*['"]|['"]\s*$/g, '').trim();
+      if (data.scope && typeof data.scope === 'string')
+        data.scope = data.scope.replace(/^\s*\[|\]\s*$/g, '');
       if (scope && !matches(scope, data.scope)) continue;
       if (versionReq && !semverSatisfies(data.version, versionReq)) continue;
       return f;
@@ -106,13 +116,32 @@ function pickFile(): string | null {
   return null;
 }
 
-const file = pickFile();
-if (!file) {
-  console.error('Doc not found for', idOrFile);
-  process.exit(2);
+async function pickOrFetchFile(): Promise<string | null> {
+  const found = pickFile();
+  if (found) return found;
+  // attempt remote fetch: try common filename patterns
+  const owner = 'samuelcotterall';
+  const repo = 'aigen-standards';
+  const branch = 'main';
+  const candidates = [
+    `${idOrFile}.md`,
+    `docs/${idOrFile}.md`,
+    `${idOrFile}/index.md`,
+    `docs/${idOrFile}/index.md`,
+  ];
+  const res = await fetchAndCacheDoc(owner, repo, branch, candidates, docsRoot);
+  if (res) return res.savedPath;
+  return null;
 }
 
-const content = readFileSync(file, 'utf8');
+(async () => {
+  const file = await pickOrFetchFile();
+  if (!file) {
+    console.error('Doc not found for', idOrFile);
+    process.exit(2);
+  }
+
+  const content = readFileSync(file, 'utf8');
 const { body } = parseFrontmatter(content);
 const lines = body.split('\n');
 
@@ -137,4 +166,5 @@ for (let i = start; i < lines.length; i++) {
     break;
   }
 }
-console.log(lines.slice(start, end).join('\n').trim());
+  console.log(lines.slice(start, end).join('\n').trim());
+})();

@@ -37,7 +37,10 @@ function parseFrontmatter(content: string): Record<string, unknown> | null {
         val = parsed;
       } catch (e) {
         const inner = (val as string).slice(1, -1);
-        const parsed = inner.split(',').map((s: string) => s.trim().replace(/^"|"$/g, '')).filter(Boolean);
+        const parsed = inner
+          .split(',')
+          .map((s: string) => s.trim().replace(/^"|"$/g, ''))
+          .filter(Boolean);
         val = parsed;
       }
     }
@@ -51,7 +54,9 @@ if (!fs.existsSync(docsRoot) || !fs.statSync(docsRoot).isDirectory()) {
   process.exit(1);
 }
 
-const files = walk(docsRoot).map((f) => path.relative(root, f)).sort();
+const files = walk(docsRoot)
+  .map((f) => path.relative(root, f))
+  .sort();
 const index: Record<string, unknown>[] = [];
 for (const file of files) {
   const abs = path.join(root, file);
@@ -61,7 +66,11 @@ for (const file of files) {
   if (!fm.id || !fm.title) continue;
   if (fm.sections && !Array.isArray(fm.sections)) {
     if (typeof fm.sections === 'string') {
-      const s = (fm.sections as string).replace(/^\[|\]$/g, '').split(',').map((x) => x.trim().replace(/^"|"$/g, '')).filter(Boolean);
+      const s = (fm.sections as string)
+        .replace(/^\[|\]$/g, '')
+        .split(',')
+        .map((x) => x.trim().replace(/^"|"$/g, ''))
+        .filter(Boolean);
       fm.sections = s;
     } else fm.sections = [String(fm.sections)];
   }

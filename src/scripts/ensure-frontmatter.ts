@@ -7,7 +7,8 @@ const root = process.cwd();
 function walk(dir: string): string[] {
   const out: string[] = [];
   for (const name of fs.readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git' || name === '.github' || name === 'scripts') continue;
+    if (name === 'node_modules' || name === '.git' || name === '.github' || name === 'scripts')
+      continue;
     const p = path.join(dir, name);
     const stat = fs.statSync(p);
     if (stat.isDirectory()) out.push(...walk(p));
@@ -38,7 +39,10 @@ function getSections(content: string): string[] {
   for (const line of lines) {
     const m = line.match(/^##+\s+(.*)$/);
     if (m) {
-      const key = m[1].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const key = m[1]
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-');
       secs.push(key);
     }
   }

@@ -8,7 +8,8 @@ function walk(dir: string): string[] {
     const p = join(dir, f);
     const s = statSync(p);
     if (s.isDirectory()) out.push(...walk(p));
-    else if (extname(p) === '.md' && f !== 'README.md') out.push(p.replace(process.cwd() + '/', ''));
+    else if (extname(p) === '.md' && f !== 'README.md')
+      out.push(p.replace(process.cwd() + '/', ''));
   }
   return out;
 }
