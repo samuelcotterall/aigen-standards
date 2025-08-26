@@ -1,0 +1,26 @@
+---
+id: stripe-md
+title: "Stripe (JS/React) — Conventions & Examples"
+topics: []
+scope: []
+version: "any"
+sections: [conventions, examples]
+---
+# Stripe (JS/React) — Conventions & Examples
+
+## Conventions
+1. Create PaymentIntents server-side; client only confirms.
+2. Encapsulate `<Elements>` with theme/locale; export `<CheckoutForm/>`.
+3. Typed webhook handlers; use idempotency keys in DB.
+
+## Examples
+```ts
+// api/payments/route.ts
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+export async function POST(req: Request) {
+  const { amount, currency } = await req.json();
+  const pi = await stripe.paymentIntents.create({ amount, currency });
+  return new Response(JSON.stringify({ clientSecret: pi.client_secret }));
+}
+```

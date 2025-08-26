@@ -1,0 +1,56 @@
+name: Docs quality
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: ['**']
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Prettier check
+        run: npm run docs:build-index --silent || true
+      - name: Lint & link checks
+        run: |
+          npx prettier -c "**/*.md"
+          npx markdownlint "**/*.md"
+          npx markdown-link-check README.md
+      - name: TOC check
+        run: node scripts/check-toc.js
+      - name: Build docs index
+        run: npm run docs:build-index
+      - name: Verify docs-index.json is up to date
+        id: verify-index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs-index.json || true
+          if git diff --staged --quiet --exit-code; then
+            echo "no-changes" > result.txt
+            echo "docs-index.json is up to date"
+          else
+            echo "has-changes" > result.txt
+            git commit -m "chore(docs): update docs-index.json [skip ci]" || true
+            git push origin HEAD:refs/heads/docs-index-update || true
+          fi
+          cat result.txt
+          echo "result=$(cat result.txt)" >> $GITHUB_OUTPUT
+      - name: Create update PR if index changed
+        if: steps.verify-index.outputs.result == 'has-changes'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'chore(docs): update docs-index.json'
+          body: |
+            Automated update of docs-index.json from CI.
+          base: ${{ github.ref_name }}
+          branch: docs-index-update

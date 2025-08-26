@@ -1,0 +1,13 @@
+{
+  "name": "docs-tools",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docs:ensure-frontmatter": "node scripts/ensure-frontmatter.js",
+    "docs:build-index": "node scripts/build-docs-index.js",
+    "docs:extract": "node scripts/extract-section.js"
+  },
+  "dependencies": {
+    "semver": "^7.5.4"
+  }
+}
