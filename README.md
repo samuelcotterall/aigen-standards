@@ -36,6 +36,8 @@ A living playbook of conventions, patterns, and integration notes for building R
 ### UI, Accessibility & Styling
 
 -- [Tailwind CSS](docs/tailwind.md)
+	- [Tailwind v3](docs/tailwind/3.md)
+	- [Tailwind v4](docs/tailwind/4.md)
 -- [Radix UI](docs/radix-ui.md)
 -- [React Aria](docs/react-aria.md)
 -- [Accessibility](docs/accessibility.md)
