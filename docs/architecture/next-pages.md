@@ -10,7 +10,8 @@ version: <=13
 sections:
   - structure
   - boundaries
-toolingLinks: {}
+toolingLinks:
+  next: 'https://nextjs.org/docs'
 ---
 
 # Architecture — Next.js (Pages Router)

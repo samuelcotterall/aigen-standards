@@ -11,7 +11,8 @@ sections:
   - structure
   - boundaries
   - server-client-split
-toolingLinks: {}
+toolingLinks:
+  next: 'https://nextjs.org/docs'
 ---
 
 # Architecture — Next.js (App Router)

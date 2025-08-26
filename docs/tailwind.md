@@ -10,7 +10,10 @@ scope:
 version: index
 sections:
   - index
-toolingLinks: {}
+toolingLinks:
+  react: 'https://react.dev'
+  next: 'https://nextjs.org/docs'
+  vite: 'https://vitejs.dev/guide/'
 ---
 
 # Tailwind CSS — Index

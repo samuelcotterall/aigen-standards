@@ -16,7 +16,9 @@ sections:
   - patterns
   - gotchas
   - references
-toolingLinks: {}
+toolingLinks:
+  react: 'https://react.dev'
+  vite: 'https://vitejs.dev/guide/'
 ---
 
 # React Router — Conventions & Examples

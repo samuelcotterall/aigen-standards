@@ -10,7 +10,9 @@ version: any
 sections:
   - structure
   - boundaries
-toolingLinks: {}
+toolingLinks:
+  vite: 'https://vitejs.dev/guide/'
+  react: 'https://react.dev'
 ---
 
 # Architecture — Vite + React Router
