@@ -12,66 +12,66 @@ A living playbook of conventions, patterns, and integration notes for building R
 
 ### Core
 
-- [Core conventions](core.md)
-- [Architecture](architecture.md)
+- [Core conventions](docs/core.md)
+- [Architecture](docs/architecture.md)
 
 ### Frameworks & Routing
 
-- [Next.js](nextjs.md)
-- [React Router](react-router.md)
+-- [Next.js](docs/nextjs.md)
+-- [React Router](docs/react-router.md)
 
 ### State Management
 
-- [Jotai](jotai.md)
-- [Redux Toolkit](redux-toolkit.md)
+-- [Jotai](docs/jotai.md)
+-- [Redux Toolkit](docs/redux-toolkit.md)
 
 ### Data, APIs & Backend
 
-- [tRPC](trpc.md)
-- [Prisma](prisma.md)
-- [Drizzle ORM](drizzle.md)
-- [Supabase](supabase.md)
-- [HTTP Clients](http-clients.md)
+-- [tRPC](docs/trpc.md)
+-- [Prisma](docs/prisma.md)
+-- [Drizzle ORM](docs/drizzle.md)
+-- [Supabase](docs/supabase.md)
+-- [HTTP Clients](docs/http-clients.md)
 
 ### UI, Accessibility & Styling
 
-- [Tailwind CSS](tailwind.md)
-- [Radix UI](radix-ui.md)
-- [React Aria](react-aria.md)
-- [Accessibility](accessibility.md)
-- [Charts](charts.md)
-- [TanStack Table](tanstack-table.md)
+-- [Tailwind CSS](docs/tailwind.md)
+-- [Radix UI](docs/radix-ui.md)
+-- [React Aria](docs/react-aria.md)
+-- [Accessibility](docs/accessibility.md)
+-- [Charts](docs/charts.md)
+-- [TanStack Table](docs/tanstack-table.md)
 
 ### Auth
 
-- [NextAuth](nextauth.md)
+-- [NextAuth](docs/nextauth.md)
 
 ### Testing & DX
 
-- [Vitest + Testing Library](vitest-testing-library.md)
-- [Playwright](playwright.md)
-- [Storybook](storybook.md)
+-- [Vitest + Testing Library](docs/vitest-testing-library.md)
+-- [Playwright](docs/playwright.md)
+-- [Storybook](docs/storybook.md)
 
 ### Integrations
 
-- [Stripe](stripe.md)
-- [Uploads](uploads.md)
+-- [Stripe](docs/stripe.md)
+-- [Uploads](docs/uploads.md)
 
 ### Cross-cutting
 
-- [Performance](performance.md)
-- [Security](security.md)
+-- [Performance](docs/performance.md)
+-- [Security](docs/security.md)
 
 ### Architecture (scoped)
 
-- Next.js App Router: [architecture/next-app.md](architecture/next-app.md)
-- Next.js Pages Router: [architecture/next-pages.md](architecture/next-pages.md)
-- Vite + React Router: [architecture/vite.md](architecture/vite.md)
+-- Next.js App Router: [architecture/next-app.md](docs/architecture/next-app.md)
+-- Next.js Pages Router: [architecture/next-pages.md](docs/architecture/next-pages.md)
+-- Vite + React Router: [architecture/vite.md](docs/architecture/vite.md)
 
 ### Utilities
 
-- [Internationalization (i18n)](i18n.md)
-- [Dates](dates.md)
+-- [Internationalization (i18n)](docs/i18n.md)
+-- [Dates](docs/dates.md)
 
 ---
 
@@ -98,25 +98,13 @@ npx markdown-link-check README.md
 
 ### Scripts: frontmatter & index
 
-There are two helper scripts under `scripts/`:
-
-- `ensure-frontmatter.js` — adds minimal frontmatter to any `.md` missing it (id, title, sections). Run once to normalize files.
-- `build-docs-index.js` — builds `docs-index.json` by reading frontmatter from all `.md` files. Useful for search or programmatic consumption.
-
-Usage:
+There are helper scripts under `dist/scripts/` (compiled from TypeScript in `src/scripts`). Prefer the npm wrappers which build then run the compiled scripts:
 
 ```sh
-# add frontmatter (safe to run repeatedly)
-node scripts/ensure-frontmatter.js
+# build TypeScript scripts
+npm run build
 
-# build JSON index
-node scripts/build-docs-index.js
-```
-
-If you prefer npm scripts (they install dependencies declared in `package.json`):
-
-```sh
-# ensure frontmatter
+# ensure frontmatter (adds missing frontmatter to docs)
 npm run docs:ensure-frontmatter
 
 # build the docs index
