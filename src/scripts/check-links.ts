@@ -39,15 +39,34 @@ async function checkUrl(url: string) {
 }
 
 async function main() {
-  const files = globSync(path.join(process.cwd(), 'docs', '**/*.md'));
   const failures: Array<{ file: string; url: string }> = [];
-  for (const file of files) {
-    const raw = fs.readFileSync(file, 'utf8');
-    const parsed = matter(raw);
-    const links = parsed.data?.toolingLinks || {};
-    for (const key of Object.keys(links)) {
-      const ok = await checkUrl(links[key]);
-      if (!ok) failures.push({ file, url: links[key] });
+  const indexPath = path.join(process.cwd(), 'docs', 'docs-index.json');
+  let index: Array<any> | null = null;
+  if (fs.existsSync(indexPath)) {
+    try {
+      index = JSON.parse(fs.readFileSync(indexPath, 'utf8')) as Array<any>;
+    } catch {
+      index = null;
+    }
+  }
+  if (index) {
+    for (const item of index) {
+      const links = item.toolingLinks || {};
+      for (const key of Object.keys(links)) {
+        const ok = await checkUrl(links[key]);
+        if (!ok) failures.push({ file: item.file || '<index>', url: links[key] });
+      }
+    }
+  } else {
+    const files = globSync(path.join(process.cwd(), 'docs', '**/*.md'));
+    for (const file of files) {
+      const raw = fs.readFileSync(file, 'utf8');
+      const parsed = matter(raw);
+      const links = parsed.data?.toolingLinks || {};
+      for (const key of Object.keys(links)) {
+        const ok = await checkUrl(links[key]);
+        if (!ok) failures.push({ file, url: links[key] });
+      }
     }
   }
   if (failures.length) {

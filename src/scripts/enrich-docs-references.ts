@@ -16,8 +16,8 @@ const index = JSON.parse(fs.readFileSync(indexPath, 'utf8')) as Array<any>;
 function chooseRefs(item: any) {
   const refs: Array<{ name: string; url: string }> = [];
   const add = (key: string) => {
-  const ref = getToolRef(key);
-  if (ref && !refs.find((r) => r.url === ref.url)) refs.push(ref);
+    const ref = getToolRef(key);
+    if (ref && !refs.find((r) => r.url === ref.url)) refs.push(ref);
   };
   if (Array.isArray(item.topics)) item.topics.forEach((t: string) => add(String(t).toLowerCase()));
   if (Array.isArray(item.scope)) item.scope.forEach((s: string) => add(String(s).toLowerCase()));

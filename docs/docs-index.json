@@ -57,7 +57,9 @@
       "boundaries",
       "server-client-split"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "next": "https://nextjs.org/docs"
+    }
   },
   {
     "file": "docs/architecture/next-pages.md",
@@ -75,7 +77,9 @@
       "structure",
       "boundaries"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "next": "https://nextjs.org/docs"
+    }
   },
   {
     "file": "docs/architecture/vite.md",
@@ -93,7 +97,10 @@
       "structure",
       "boundaries"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "vite": "https://vitejs.dev/guide/",
+      "react": "https://react.dev"
+    }
   },
   {
     "file": "docs/charts.md",
@@ -330,7 +337,10 @@
       "gotchas",
       "references"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/redux-toolkit.md",
@@ -415,7 +425,11 @@
     "sections": [
       "index"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tailwind/3.md",
@@ -435,7 +449,11 @@
       "examples",
       "migration"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tailwind/4.md",
@@ -455,7 +473,11 @@
       "examples",
       "migration"
     ],
-    "toolingLinks": {}
+    "toolingLinks": {
+      "react": "https://react.dev",
+      "next": "https://nextjs.org/docs",
+      "vite": "https://vitejs.dev/guide/"
+    }
   },
   {
     "file": "docs/tanstack-table.md",

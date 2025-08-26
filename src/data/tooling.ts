@@ -15,14 +15,49 @@ const TOOLS: Record<string, ToolInfo> = {
     synonyms: ['nextjs'],
   },
   react: { key: 'react', name: 'React', url: 'https://react.dev/', docsUrl: 'https://react.dev' },
-  vite: { key: 'vite', name: 'Vite', url: 'https://vitejs.dev/', docsUrl: 'https://vitejs.dev/guide/' },
-  tailwind: { key: 'tailwind', name: 'Tailwind CSS', url: 'https://tailwindcss.com/', docsUrl: 'https://tailwindcss.com/docs' },
-  prisma: { key: 'prisma', name: 'Prisma', url: 'https://www.prisma.io/', docsUrl: 'https://www.prisma.io/docs' },
-  supabase: { key: 'supabase', name: 'Supabase', url: 'https://supabase.com/', docsUrl: 'https://supabase.com/docs' },
-  playwright: { key: 'playwright', name: 'Playwright', url: 'https://playwright.dev/', docsUrl: 'https://playwright.dev/docs/intro' },
-  storybook: { key: 'storybook', name: 'Storybook', url: 'https://storybook.js.org/', docsUrl: 'https://storybook.js.org/docs' },
+  vite: {
+    key: 'vite',
+    name: 'Vite',
+    url: 'https://vitejs.dev/',
+    docsUrl: 'https://vitejs.dev/guide/',
+  },
+  tailwind: {
+    key: 'tailwind',
+    name: 'Tailwind CSS',
+    url: 'https://tailwindcss.com/',
+    docsUrl: 'https://tailwindcss.com/docs',
+  },
+  prisma: {
+    key: 'prisma',
+    name: 'Prisma',
+    url: 'https://www.prisma.io/',
+    docsUrl: 'https://www.prisma.io/docs',
+  },
+  supabase: {
+    key: 'supabase',
+    name: 'Supabase',
+    url: 'https://supabase.com/',
+    docsUrl: 'https://supabase.com/docs',
+  },
+  playwright: {
+    key: 'playwright',
+    name: 'Playwright',
+    url: 'https://playwright.dev/',
+    docsUrl: 'https://playwright.dev/docs/intro',
+  },
+  storybook: {
+    key: 'storybook',
+    name: 'Storybook',
+    url: 'https://storybook.js.org/',
+    docsUrl: 'https://storybook.js.org/docs',
+  },
   trpc: { key: 'trpc', name: 'tRPC', url: 'https://trpc.io/', docsUrl: 'https://trpc.io/' },
-  'react-router': { key: 'react-router', name: 'React Router', url: 'https://reactrouter.com', docsUrl: 'https://reactrouter.com' },
+  'react-router': {
+    key: 'react-router',
+    name: 'React Router',
+    url: 'https://reactrouter.com',
+    docsUrl: 'https://reactrouter.com',
+  },
 };
 
 // Build a synonyms map for quick canonicalization
@@ -54,7 +89,9 @@ export function getToolUrl(keyOrTopic: string | undefined): string | undefined {
   return t ? t.docsUrl || t.url : undefined;
 }
 
-export function getToolRef(keyOrTopic: string | undefined): { name: string; url: string } | undefined {
+export function getToolRef(
+  keyOrTopic: string | undefined
+): { name: string; url: string } | undefined {
   const t = findTool(keyOrTopic);
   if (!t) return undefined;
   return { name: t.name + ' docs', url: t.docsUrl || t.url };
