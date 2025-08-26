@@ -1,10 +1,13 @@
 ---
 id: radix-ui-md
-title: "Radix UI — Conventions & Examples"
+title: Radix UI — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Radix UI — Conventions & Examples
 

@@ -1,10 +1,13 @@
 ---
 id: redux-toolkit-md
-title: "Redux Toolkit — Conventions & Examples"
+title: Redux Toolkit — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Redux Toolkit — Conventions & Examples
 

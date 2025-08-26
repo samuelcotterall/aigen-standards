@@ -1,10 +1,13 @@
 ---
 id: nextauth-md
-title: "NextAuth / Auth.js — Conventions & Examples"
+title: NextAuth / Auth.js — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # NextAuth / Auth.js — Conventions & Examples
 

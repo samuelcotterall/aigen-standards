@@ -1,10 +1,16 @@
 ---
 id: architecture-next-pages
 title: Architecture — Next.js Pages Router
-topics: [architecture]
-scope: [next, pages-router]
-version: '<=13'
-sections: [structure, boundaries]
+topics:
+  - architecture
+scope:
+  - next
+  - pages-router
+version: <=13
+sections:
+  - structure
+  - boundaries
+toolingLinks: {}
 ---
 
 # Architecture — Next.js (Pages Router)

@@ -1,10 +1,41 @@
 ---
 id: core-md
-title: "Core Packages — Conventions & Examples"
+title: Core Packages — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [react-hook-form, conventions, examples, zod, conventions, examples, tanstack-query-react-query-, conventions, examples, swr, conventions, examples, framer-motion, conventions, examples, zustand, conventions, examples, msw-mock-service-worker-, conventions, examples, react-window, conventions, examples, -vitejs-plugin-react, conventions, examples, shadcn-ui, conventions, examples]
+version: any
+sections:
+  - react-hook-form
+  - conventions
+  - examples
+  - zod
+  - conventions
+  - examples
+  - tanstack-query-react-query-
+  - conventions
+  - examples
+  - swr
+  - conventions
+  - examples
+  - framer-motion
+  - conventions
+  - examples
+  - zustand
+  - conventions
+  - examples
+  - msw-mock-service-worker-
+  - conventions
+  - examples
+  - react-window
+  - conventions
+  - examples
+  - '-vitejs-plugin-react'
+  - conventions
+  - examples
+  - shadcn-ui
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Core Packages — Conventions & Examples
 

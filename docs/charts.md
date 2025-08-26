@@ -1,10 +1,13 @@
 ---
 id: charts-md
-title: "Charts (Recharts / Chart.js React) — Conventions & Examples"
+title: Charts (Recharts / Chart.js React) — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Charts (Recharts / Chart.js React) — Conventions & Examples
 

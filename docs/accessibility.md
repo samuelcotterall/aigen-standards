@@ -1,10 +1,15 @@
 ---
 id: accessibility-md
-title: "Accessibility — A11y Conventions for React/Next"
+title: Accessibility — A11y Conventions for React/Next
 topics: []
 scope: []
-version: "any"
-sections: [core-principles, conventions, patterns, checklist]
+version: any
+sections:
+  - core-principles
+  - conventions
+  - patterns
+  - checklist
+toolingLinks: {}
 ---
 # Accessibility — A11y Conventions for React/Next
 

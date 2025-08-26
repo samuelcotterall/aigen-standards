@@ -1,17 +1,23 @@
 [
   {
+    "file": "docs/README.md",
+    "id": "README",
+    "title": "README",
+    "topics": [],
+    "scope": [],
+    "version": "any",
+    "sections": [],
+    "toolingLinks": "{}"
+  },
+  {
     "file": "docs/accessibility.md",
     "id": "accessibility-md",
     "title": "Accessibility — A11y Conventions for React/Next",
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "core-principles",
-      "conventions",
-      "patterns",
-      "checklist"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/architecture.md",
@@ -20,65 +26,38 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "goals",
-      "recommended-structure",
-      "conventions",
-      "boundaries",
-      "checklist"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/architecture/next-app.md",
     "id": "architecture-next-app",
     "title": "Architecture — Next.js App Router",
-    "topics": [
-      "architecture"
-    ],
-    "scope": [
-      "next",
-      "app-router"
-    ],
+    "topics": "",
+    "scope": "",
     "version": ">=13",
-    "sections": [
-      "structure",
-      "boundaries",
-      "server-client-split"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/architecture/next-pages.md",
     "id": "architecture-next-pages",
     "title": "Architecture — Next.js Pages Router",
-    "topics": [
-      "architecture"
-    ],
-    "scope": [
-      "next",
-      "pages-router"
-    ],
+    "topics": "",
+    "scope": "",
     "version": "<=13",
-    "sections": [
-      "structure",
-      "boundaries"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/architecture/vite.md",
     "id": "architecture-vite",
     "title": "Architecture — Vite + React Router",
-    "topics": [
-      "architecture"
-    ],
-    "scope": [
-      "vite",
-      "react"
-    ],
+    "topics": "",
+    "scope": "",
     "version": "any",
-    "sections": [
-      "structure",
-      "boundaries"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/charts.md",
@@ -87,10 +66,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/core.md",
@@ -99,38 +76,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "react-hook-form",
-      "conventions",
-      "examples",
-      "zod",
-      "conventions",
-      "examples",
-      "tanstack-query-react-query-",
-      "conventions",
-      "examples",
-      "swr",
-      "conventions",
-      "examples",
-      "framer-motion",
-      "conventions",
-      "examples",
-      "zustand",
-      "conventions",
-      "examples",
-      "msw-mock-service-worker-",
-      "conventions",
-      "examples",
-      "react-window",
-      "conventions",
-      "examples",
-      "-vitejs-plugin-react",
-      "conventions",
-      "examples",
-      "shadcn-ui",
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/dates.md",
@@ -139,10 +86,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/drizzle.md",
@@ -151,10 +96,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/http-clients.md",
@@ -163,10 +106,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/i18n.md",
@@ -175,10 +116,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/jotai.md",
@@ -187,10 +126,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/nextauth.md",
@@ -199,10 +136,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/nextjs.md",
@@ -211,10 +146,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/performance.md",
@@ -223,13 +156,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "goals",
-      "conventions",
-      "patterns",
-      "diagnostics",
-      "checklist"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/playwright.md",
@@ -238,10 +166,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/prisma.md",
@@ -250,10 +176,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/radix-ui.md",
@@ -262,10 +186,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/react-aria.md",
@@ -274,24 +196,18 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/react-router.md",
     "id": "react-router",
     "title": "React Router",
-    "topics": [
-      "routing"
-    ],
-    "scope": [
-      "react",
-      "vite"
-    ],
+    "topics": "",
+    "scope": "",
     "version": ">=6.4",
-    "sections": []
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/redux-toolkit.md",
@@ -300,10 +216,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/security.md",
@@ -312,12 +226,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "core-areas",
-      "conventions",
-      "patterns",
-      "checklist"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/storybook.md",
@@ -326,10 +236,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/stripe.md",
@@ -338,10 +246,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/supabase.md",
@@ -350,65 +256,38 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/tailwind.md",
     "id": "tailwind",
     "title": "Tailwind CSS",
-    "topics": [
-      "styling"
-    ],
-    "scope": [
-      "react",
-      "next",
-      "vite"
-    ],
+    "topics": "",
+    "scope": "",
     "version": "index",
-    "sections": [
-      "index"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/tailwind/3.md",
     "id": "tailwind-3",
     "title": "Tailwind CSS v3",
-    "topics": [
-      "styling"
-    ],
-    "scope": [
-      "react",
-      "next",
-      "vite"
-    ],
+    "topics": "",
+    "scope": "",
     "version": "3.x",
-    "sections": [
-      "conventions",
-      "examples",
-      "migration"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/tailwind/4.md",
     "id": "tailwind-4",
     "title": "Tailwind CSS v4",
-    "topics": [
-      "styling"
-    ],
-    "scope": [
-      "react",
-      "next",
-      "vite"
-    ],
+    "topics": "",
+    "scope": "",
     "version": "4.x",
-    "sections": [
-      "conventions",
-      "examples",
-      "migration"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/tanstack-table.md",
@@ -417,10 +296,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/trpc.md",
@@ -429,10 +306,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/uploads.md",
@@ -441,15 +316,8 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "golden-rules",
-      "s3-style-presigned-upload-direct-to-bucket-",
-      "uploadthing",
-      "uppy-tus-multipart-",
-      "security-compliance",
-      "a11y-ux",
-      "checklist"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   },
   {
     "file": "docs/vitest-testing-library.md",
@@ -458,9 +326,7 @@
     "topics": [],
     "scope": [],
     "version": "any",
-    "sections": [
-      "conventions",
-      "examples"
-    ]
+    "sections": [],
+    "toolingLinks": "{}"
   }
 ]

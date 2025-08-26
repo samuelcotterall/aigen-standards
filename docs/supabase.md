@@ -1,10 +1,13 @@
 ---
 id: supabase-md
-title: "Supabase JS — Conventions & Examples"
+title: Supabase JS — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Supabase JS — Conventions & Examples
 

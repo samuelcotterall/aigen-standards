@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { performance } = require('perf_hooks');
 
 const root = process.cwd();
 const docsRoot = path.join(root, 'docs');
@@ -51,6 +52,8 @@ if (!fs.existsSync(docsRoot) || !fs.statSync(docsRoot).isDirectory()) {
   process.exit(1);
 }
 
+const start = performance.now();
+
 const files = walk(docsRoot)
   .map((f) => path.relative(root, f))
   .sort();
@@ -79,4 +82,6 @@ for (const file of files) {
 
 const outPath = path.join(docsRoot, 'docs-index.json');
 fs.writeFileSync(outPath, JSON.stringify(index, null, 2), 'utf8');
+const elapsed = performance.now() - start;
 console.log(outPath, 'written with', index.length, 'entries');
+console.log(`build-docs-index: elapsed ${Math.round(elapsed)}ms`);

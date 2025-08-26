@@ -1,10 +1,13 @@
 ---
 id: jotai-md
-title: "Jotai — Conventions & Examples"
+title: Jotai — Conventions & Examples
 topics: []
 scope: []
-version: "any"
-sections: [conventions, examples]
+version: any
+sections:
+  - conventions
+  - examples
+toolingLinks: {}
 ---
 # Jotai — Conventions & Examples
 
