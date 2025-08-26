@@ -1,20 +1,23 @@
 ---
 id: nextjs-md
-title: "Next.js (App Router) — Conventions & Examples"
+title: 'Next.js (App Router) — Conventions & Examples'
 topics: []
 scope: []
-version: "any"
+version: 'any'
 sections: [conventions, examples]
 ---
+
 # Next.js (App Router) — Conventions & Examples
 
 ## Conventions
+
 1. Route groups & shared layouts (`(marketing)`, `(app)`), `loading.tsx`/`error.tsx` per segment.
 2. Server-first actions colocated with forms; validate with Zod at boundaries.
 3. File naming: `route.ts` for HTTP endpoints, `page.tsx` for UI; `lib/` for server utilities.
 
 ## Examples
-```tsx
+
+````tsx
 // app/(marketing)/layout.tsx
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto max-w-5xl p-6">{children}</div>;
@@ -32,6 +35,50 @@ export default async function UserPage({ params }: { params: { id: string } }) {
 // app/api/users/route.ts
 import { NextResponse } from "next/server";
 export async function GET() { return NextResponse.json([{ id: "1" }]); }
+## Validated snippets
+
+These snippets are aligned with Next.js App Router best-practices (layouts, data fetching, caching).
+
+Root layout (app/layout.tsx):
+
+```tsx
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+````
+
+Server component data fetch with revalidation:
+
+```ts
+export default async function Page() {
+  const res = await fetch('https://api.example.com/data', { next: { revalidate: 60 } });
+  const data = await res.json();
+  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+}
+```
+
+Loading UI (app/[segment]/loading.tsx):
+
+```tsx
+export default function Loading() {
+  return <div>Loading…</div>;
+}
+```
+
+Route handler (app/api/hello/route.ts):
+
+```ts
+export async function GET() {
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+```
+
 ```
 
 ## References / Validation
@@ -41,3 +88,4 @@ The content in this document has been reviewed against authoritative sources:
 
 _If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
 
+```

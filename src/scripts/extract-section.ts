@@ -3,6 +3,8 @@ import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, extname } from 'path';
 import semver from 'semver';
 import { fetchAndCacheDoc } from '../utils/fetchDoc';
+import { performance } from 'perf_hooks';
+import Fuse from 'fuse.js';
 
 function walk(dir: string): string[] {
   const out: string[] = [];
@@ -99,6 +101,19 @@ const root = process.cwd();
 const docsRoot = join(root, 'docs');
 const files = walk(docsRoot);
 
+function buildIndexForFuzzy() {
+  const entries: { id: string; title: string; file: string }[] = [];
+  for (const f of files) {
+    try {
+      const content = readFileSync(f, 'utf8');
+      const { data } = parseFrontmatter(content);
+      if (data && (data.id || data.title))
+        entries.push({ id: String(data.id || ''), title: String(data.title || ''), file: f });
+    } catch {}
+  }
+  return entries;
+}
+
 function pickFile(): string | null {
   for (const f of files) {
     const content = readFileSync(f, 'utf8');
@@ -135,36 +150,52 @@ async function pickOrFetchFile(): Promise<string | null> {
 }
 
 (async () => {
+  const benchStart = performance.now();
   const file = await pickOrFetchFile();
   if (!file) {
     console.error('Doc not found for', idOrFile);
+    // provide fuzzy suggestions
+    try {
+      const idx = buildIndexForFuzzy();
+      const fuse = new Fuse(idx, { keys: ['id', 'title'], includeScore: true, threshold: 0.4 });
+      const raw = fuse.search(idOrFile).slice(0, 5) as Fuse.FuseResult<(typeof idx)[number]>[];
+      const results = raw.map((r) => ({ id: r.item.id, title: r.item.title }));
+      if (results.length) {
+        console.error('Did you mean:');
+        for (const r of results) console.error(`  - ${r.id}  — ${r.title}`);
+      }
+    } catch (e) {
+      if (process.env.EXTRACT_DEBUG === '1') console.error('fuzzy error', (e as Error).message);
+    }
     process.exit(2);
   }
 
   const content = readFileSync(file, 'utf8');
-const { body } = parseFrontmatter(content);
-const lines = body.split('\n');
+  const { body } = parseFrontmatter(content);
+  const lines = body.split('\n');
 
-const needle = `## ${section
-  .replace(/(^.|-.)/g, (m) => (m[1] ? m[1].toUpperCase() : m[0].toUpperCase()))
-  .replace(/-/g, ' ')}`;
-let start = -1;
-for (let i = 0; i < lines.length; i++) {
-  if (lines[i].trim() === needle) {
-    start = i + 1;
-    break;
+  const needle = `## ${section
+    .replace(/(^.|-.)/g, (m) => (m[1] ? m[1].toUpperCase() : m[0].toUpperCase()))
+    .replace(/-/g, ' ')}`;
+  let start = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === needle) {
+      start = i + 1;
+      break;
+    }
   }
-}
-if (start === -1) {
-  console.error(`Section not found: ${section}`);
-  process.exit(3);
-}
-let end = lines.length;
-for (let i = start; i < lines.length; i++) {
-  if (lines[i].startsWith('## ')) {
-    end = i;
-    break;
+  if (start === -1) {
+    console.error(`Section not found: ${section}`);
+    process.exit(3);
   }
-}
+  let end = lines.length;
+  for (let i = start; i < lines.length; i++) {
+    if (lines[i].startsWith('## ')) {
+      end = i;
+      break;
+    }
+  }
+  const elapsed = Math.round(performance.now() - benchStart);
   console.log(lines.slice(start, end).join('\n').trim());
+  console.error(`extract-section: elapsed ${elapsed}ms`);
 })();

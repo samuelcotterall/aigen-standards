@@ -11,14 +11,22 @@ function logDebug(...args: unknown[]) {
   if (process.env.EXTRACT_DEBUG === '1') console.error('[fetchDoc]', ...args);
 }
 
-export async function fetchFromApi(owner: string, repo: string, branch: string, rel: string, token?: string): Promise<string | null> {
+export async function fetchFromApi(
+  owner: string,
+  repo: string,
+  branch: string,
+  rel: string,
+  token?: string
+): Promise<string | null> {
   const options = {
     hostname: 'api.github.com',
-    path: `/repos/${owner}/${repo}/contents/${encodeURIComponent(rel)}?ref=${encodeURIComponent(branch)}`,
+    path: `/repos/${owner}/${repo}/contents/${encodeURIComponent(rel)}?ref=${encodeURIComponent(
+      branch
+    )}`,
     headers: {
       'User-Agent': 'aigen-standards-fetcher',
-      Accept: 'application/vnd.github.v3.raw'
-    }
+      Accept: 'application/vnd.github.v3.raw',
+    },
   } as any;
   if (token) options.headers.Authorization = `token ${token}`;
 
@@ -73,7 +81,13 @@ export async function fetchAndCacheDoc(
   candidatePaths: string[],
   destDir: string,
   opts?: {
-    fetchFromApi?: (owner: string, repo: string, branch: string, rel: string, token?: string) => Promise<string | null>;
+    fetchFromApi?: (
+      owner: string,
+      repo: string,
+      branch: string,
+      rel: string,
+      token?: string
+    ) => Promise<string | null>;
     fetchRawUrl?: (url: string) => Promise<string | null>;
   }
 ): Promise<FetchResult> {
@@ -81,7 +95,9 @@ export async function fetchAndCacheDoc(
   for (const rel of candidatePaths) {
     try {
       logDebug('trying API for', rel);
-      const apiRes = await (opts && opts.fetchFromApi ? opts.fetchFromApi(owner, repo, branch, rel, token) : fetchFromApi(owner, repo, branch, rel, token));
+      const apiRes = await (opts && opts.fetchFromApi
+        ? opts.fetchFromApi(owner, repo, branch, rel, token)
+        : fetchFromApi(owner, repo, branch, rel, token));
       let content: string | null = apiRes;
       if (!content) {
         const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${rel}`;
@@ -114,7 +130,12 @@ export async function fetchAndCacheDoc(
             logDebug('branch exists; reusing', branchName);
           } catch (err: any) {
             if (err && err.status === 404) {
-              await octokit.rest.git.createRef({ owner, repo, ref: `refs/heads/${branchName}`, sha: baseSha });
+              await octokit.rest.git.createRef({
+                owner,
+                repo,
+                ref: `refs/heads/${branchName}`,
+                sha: baseSha,
+              });
               logDebug('created branch', branchName);
             } else {
               throw err;
@@ -128,25 +149,49 @@ export async function fetchAndCacheDoc(
             path: rel,
             message: `chore(docs): cache fetched doc ${rel}`,
             content: contentB64,
-            branch: branchName
+            branch: branchName,
           });
           // try to find existing open PR for this branch
-          const prs = await octokit.rest.pulls.list({ owner, repo, head: `${owner}:${branchName}`, base: branch, state: 'open' });
+          const prs = await octokit.rest.pulls.list({
+            owner,
+            repo,
+            head: `${owner}:${branchName}`,
+            base: branch,
+            state: 'open',
+          });
           let prNumber: number | null = null;
           if (prs.data && prs.data.length) {
             prNumber = prs.data[0].number;
             logDebug('found existing PR', prNumber);
           } else {
-            const pr = await octokit.rest.pulls.create({ owner, repo, title: `chore(docs): cache ${rel}`, head: branchName, base: branch, body: `Automated caching of ${rel}` });
+            const pr = await octokit.rest.pulls.create({
+              owner,
+              repo,
+              title: `chore(docs): cache ${rel}`,
+              head: branchName,
+              base: branch,
+              body: `Automated caching of ${rel}`,
+            });
             prNumber = pr.data.number;
             logDebug('created PR', pr.data.html_url);
           }
           // optional reviewers and labels via event/env
-          const reviewers = (process.env.EXTRACT_PR_REVIEWERS || '').split(',').map((s) => s.trim()).filter(Boolean);
+          const reviewers = (process.env.EXTRACT_PR_REVIEWERS || '')
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean);
           if (reviewers.length && prNumber) {
-            await octokit.rest.pulls.requestReviewers({ owner, repo, pull_number: prNumber, reviewers });
+            await octokit.rest.pulls.requestReviewers({
+              owner,
+              repo,
+              pull_number: prNumber,
+              reviewers,
+            });
           }
-          const labels = (process.env.EXTRACT_PR_LABELS || '').split(',').map((s) => s.trim()).filter(Boolean);
+          const labels = (process.env.EXTRACT_PR_LABELS || '')
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean);
           if (labels.length && prNumber) {
             await octokit.rest.issues.addLabels({ owner, repo, issue_number: prNumber, labels });
           }

@@ -11,13 +11,16 @@ async function main() {
     try {
       paths = JSON.parse(process.env.MISSING_DOCS);
     } catch {
-      paths = process.env.MISSING_DOCS.split(',').map((s) => s.trim()).filter(Boolean);
+      paths = process.env.MISSING_DOCS.split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
     }
   } else if (process.env.GITHUB_EVENT_PATH) {
     try {
       const payload = JSON.parse(require('fs').readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
       // expect payload.client_payload.paths = []
-      if (payload && payload.client_payload && Array.isArray(payload.client_payload.paths)) paths = payload.client_payload.paths;
+      if (payload && payload.client_payload && Array.isArray(payload.client_payload.paths))
+        paths = payload.client_payload.paths;
     } catch (e: any) {
       console.error('failed to read event payload', e && e.message);
     }
