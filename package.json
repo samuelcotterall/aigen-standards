@@ -8,16 +8,20 @@
     "docs:ensure-frontmatter": "node dist/scripts/ensure-frontmatter.js",
     "docs:build-index": "node dist/scripts/build-docs-index.js",
     "docs:extract": "node dist/scripts/extract-section.js",
-    "docs:check-toc": "node dist/scripts/check-toc.js",
-    "dev:extract": "ts-node src/scripts/extract-section.ts"
+  "docs:check-toc": "node dist/scripts/check-toc.js",
+  "dev:extract": "ts-node src/scripts/extract-section.ts",
+  "test": "vitest"
   },
   "dependencies": {
-    "semver": "^7.5.4"
+  "semver": "^7.5.4",
+  "@octokit/rest": "^19.0.7"
   },
   "devDependencies": {
-    "typescript": "^5.5.6",
-    "ts-node": "^10.9.1",
-    "@types/node": "^20.5.1",
-    "@types/semver": "^7.3.12"
+  "typescript": "^5.5.6",
+  "ts-node": "^10.9.1",
+  "@types/node": "^20.5.1",
+  "@types/semver": "^7.3.12",
+  "vitest": "^1.1.5",
+  "msw": "^1.2.3"
   }
 }

@@ -1,27 +1,55 @@
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
+import { Buffer } from 'buffer';
+import { Octokit } from '@octokit/rest';
 
 type FetchResult = { savedPath: string } | null;
 
-export async function fetchAndCacheDoc(owner: string, repo: string, branch: string, candidatePaths: string[], destDir: string): Promise<FetchResult> {
-  for (const rel of candidatePaths) {
-    const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${rel}`;
-    try {
-      const content = await fetchText(url);
-      if (!content) continue;
-      const outPath = path.join(destDir, rel);
-      fs.mkdirSync(path.dirname(outPath), { recursive: true });
-      fs.writeFileSync(outPath, content, 'utf8');
-      return { savedPath: outPath };
-    } catch (e) {
-      // ignore and try next
-    }
-  }
-  return null;
+function logDebug(...args: unknown[]) {
+  if (process.env.EXTRACT_DEBUG === '1') console.error('[fetchDoc]', ...args);
 }
 
-function fetchText(url: string): Promise<string | null> {
+export async function fetchFromApi(owner: string, repo: string, branch: string, rel: string, token?: string): Promise<string | null> {
+  const options = {
+    hostname: 'api.github.com',
+    path: `/repos/${owner}/${repo}/contents/${encodeURIComponent(rel)}?ref=${encodeURIComponent(branch)}`,
+    headers: {
+      'User-Agent': 'aigen-standards-fetcher',
+      Accept: 'application/vnd.github.v3.raw'
+    }
+  } as any;
+  if (token) options.headers.Authorization = `token ${token}`;
+
+  return new Promise((resolve, reject) => {
+    https
+      .get(options, (res) => {
+        const chunks: Buffer[] = [];
+        res.on('data', (c) => chunks.push(Buffer.from(c)));
+        res.on('end', () => {
+          if (!res.statusCode) return resolve(null);
+          if (res.statusCode === 200) {
+            const body = Buffer.concat(chunks).toString('utf8');
+            // If API returned JSON with base64 content, try to parse
+            try {
+              const maybe = JSON.parse(body);
+              if (maybe && maybe.content && maybe.encoding === 'base64') {
+                const decoded = Buffer.from(maybe.content, 'base64').toString('utf8');
+                return resolve(decoded);
+              }
+            } catch (e) {
+              // not JSON, assume raw body
+            }
+            return resolve(body);
+          }
+          resolve(null);
+        });
+      })
+      .on('error', (err) => reject(err));
+  });
+}
+
+export function fetchRawUrl(url: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     https
       .get(url, (res) => {
@@ -35,4 +63,90 @@ function fetchText(url: string): Promise<string | null> {
       })
       .on('error', (err) => reject(err));
   });
+}
+
+export async function fetchAndCacheDoc(
+  owner: string,
+  repo: string,
+  branch: string,
+  candidatePaths: string[],
+  destDir: string,
+  opts?: {
+    fetchFromApi?: (owner: string, repo: string, branch: string, rel: string, token?: string) => Promise<string | null>;
+    fetchRawUrl?: (url: string) => Promise<string | null>;
+  }
+): Promise<FetchResult> {
+  const token = process.env.GITHUB_TOKEN;
+  for (const rel of candidatePaths) {
+    try {
+      logDebug('trying API for', rel);
+      const apiRes = await (opts && opts.fetchFromApi ? opts.fetchFromApi(owner, repo, branch, rel, token) : fetchFromApi(owner, repo, branch, rel, token));
+      let content: string | null = apiRes;
+      if (!content) {
+        const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${rel}`;
+        logDebug('falling back to raw url', rawUrl);
+        content = await (opts && opts.fetchRawUrl ? opts.fetchRawUrl(rawUrl) : fetchRawUrl(rawUrl));
+      }
+      if (!content) {
+        logDebug('no content for', rel);
+        continue;
+      }
+      const outPath = path.join(destDir, rel);
+      fs.mkdirSync(path.dirname(outPath), { recursive: true });
+      fs.writeFileSync(outPath, content, 'utf8');
+      logDebug('saved', outPath);
+
+      // optional: auto-commit the cached doc back to the repo and open a PR when requested
+      try {
+        if (process.env.EXTRACT_AUTO_COMMIT === '1' && token) {
+          const branchName = `docs-cache-${Date.now()}`;
+          logDebug('auto-commit enabled, creating branch', branchName);
+          const octokit = new Octokit({ auth: token });
+          // get base branch sha
+          const baseRef = await octokit.rest.git.getRef({ owner, repo, ref: `heads/${branch}` });
+          const baseSha = baseRef.data.object.sha;
+          // create new branch
+          await octokit.rest.git.createRef({ owner, repo, ref: `refs/heads/${branchName}`, sha: baseSha });
+          // create or update file on new branch
+          const contentB64 = Buffer.from(content, 'utf8').toString('base64');
+          await octokit.rest.repos.createOrUpdateFileContents({
+            owner,
+            repo,
+            path: rel,
+            message: `chore(docs): cache fetched doc ${rel}`,
+            content: contentB64,
+            branch: branchName
+          });
+          // create PR
+          const pr = await octokit.rest.pulls.create({
+            owner,
+            repo,
+            title: `chore(docs): cache ${rel}`,
+            head: branchName,
+            base: branch,
+            body: `Automated caching of ${rel}`
+          });
+          const prNumber = pr.data.number;
+          // optional reviewers and labels via env
+          const reviewers = (process.env.EXTRACT_PR_REVIEWERS || '').split(',').map((s) => s.trim()).filter(Boolean);
+          if (reviewers.length) {
+            await octokit.rest.pulls.requestReviewers({ owner, repo, pull_number: prNumber, reviewers });
+          }
+          const labels = (process.env.EXTRACT_PR_LABELS || '').split(',').map((s) => s.trim()).filter(Boolean);
+          if (labels.length) {
+            await octokit.rest.issues.addLabels({ owner, repo, issue_number: prNumber, labels });
+          }
+          logDebug('auto-commit PR created', pr.data.html_url);
+        }
+      } catch (e: any) {
+        logDebug('auto-commit failed', e && e.message);
+      }
+
+      return { savedPath: outPath };
+    } catch (e: any) {
+      logDebug('fetch error for', rel, e && e.message);
+      continue;
+    }
+  }
+  return null;
 }
