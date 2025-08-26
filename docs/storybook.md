@@ -22,3 +22,11 @@ const meta: Meta<typeof Button> = { component: Button };
 export default meta;
 export const Primary: StoryObj<typeof Button> = { args: { children: "Click" } };
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

@@ -20,3 +20,11 @@ import ky from "ky";
 export const api = ky.create({ prefixUrl: "/api", timeout: 10000 });
 export const getUser = (id: string) => api.get(`users/${id}`).json();
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

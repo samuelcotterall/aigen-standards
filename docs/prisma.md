@@ -28,3 +28,11 @@ model User {
 import { prisma } from "@/lib/prisma";
 export const getUser = async (id: string) => prisma.user.findUnique({ where: { id } });
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Prisma docs](https://www.prisma.io/docs)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

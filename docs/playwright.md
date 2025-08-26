@@ -23,3 +23,11 @@ test("login flow", async ({ page }) => {
   await expect(page).toHaveURL("/dashboard");
 });
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Playwright docs](https://playwright.dev/docs/intro)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

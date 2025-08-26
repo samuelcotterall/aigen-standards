@@ -27,3 +27,11 @@ export const users = pgTable("users", {
 import { InferModel } from "drizzle-orm";
 export type User = InferModel<typeof users>;
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

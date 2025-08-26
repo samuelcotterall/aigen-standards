@@ -17,3 +17,12 @@ sections: [structure, boundaries]
 ## Boundaries
 
 - Prefer server-rendered data via props; avoid client-only fetching on first paint.
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Architecture guidelines](https://nextjs.org/docs/architecture)
+- [Next.js docs](https://nextjs.org/docs)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

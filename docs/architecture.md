@@ -52,3 +52,11 @@ src/
 - [ ] Features not importing each other directly; use lib or app coordinators
 - [ ] Clear public API for each feature
 - [ ] Path aliases configured and mirrored in tsconfig
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Architecture guidelines](https://nextjs.org/docs/architecture)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

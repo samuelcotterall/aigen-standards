@@ -27,3 +27,11 @@ export function RevenueChart({ data }: { data: Array<{ x: string; y: number }> }
   );
 }
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [React docs](https://react.dev)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

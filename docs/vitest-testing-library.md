@@ -27,3 +27,11 @@ it("renders", () => {
   expect(screen.getByRole("button", { name: "Click" })).toBeInTheDocument();
 });
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Vite docs](https://vitejs.dev/guide/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

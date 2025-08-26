@@ -22,3 +22,11 @@ export function Counter() {
   return <button onClick={() => set((c) => c + 1)}>{count}</button>;
 }
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

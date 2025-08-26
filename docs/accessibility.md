@@ -36,3 +36,12 @@ sections: [core-principles, conventions, patterns, checklist]
 - [ ] Focus states visible and not removed
 - [ ] Motion reduced when user requests
 - [ ] Forms labeled with errors tied to inputs
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Next.js docs](https://nextjs.org/docs)
+- [React docs](https://react.dev)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

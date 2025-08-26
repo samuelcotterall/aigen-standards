@@ -29,3 +29,11 @@ export const { auth, handlers } = NextAuth({ providers: [], callbacks: {} });
 export { auth as middleware } from "@/lib/auth";
 export const config = { matcher: ["/app/:path*"] };
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Next.js docs](https://nextjs.org/docs)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

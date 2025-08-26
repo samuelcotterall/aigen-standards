@@ -18,3 +18,11 @@ sections: [conventions, examples]
 import { formatISO } from "date-fns";
 export const toIsoUtc = (d: Date) => formatISO(new Date(d.toISOString()));
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

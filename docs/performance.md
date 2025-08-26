@@ -39,3 +39,13 @@ sections: [goals, conventions, patterns, diagnostics, checklist]
 - [ ] Images optimized and sized correctly
 - [ ] Unused deps removed; tree-shaking effective
 - [ ] Long lists virtualized
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Next.js docs](https://nextjs.org/docs)
+- [React docs](https://react.dev)
+- [Vite docs](https://vitejs.dev/guide/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

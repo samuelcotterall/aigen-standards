@@ -19,3 +19,11 @@ sections: [conventions, examples]
 import { createClient } from "@supabase/supabase-js";
 export const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Supabase docs](https://supabase.com/docs)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

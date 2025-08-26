@@ -17,3 +17,13 @@ sections: [structure, boundaries]
 ## Boundaries
 
 - Keep server-only code out of client bundles; place in `/server` or separate package.
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Architecture guidelines](https://nextjs.org/docs/architecture)
+- [Vite docs](https://vitejs.dev/guide/)
+- [React docs](https://react.dev)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

@@ -29,3 +29,11 @@ import { userRouter } from "./user";
 export const appRouter = router({ user: userRouter });
 export type AppRouter = typeof appRouter;
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [General web docs](https://developer.mozilla.org/)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

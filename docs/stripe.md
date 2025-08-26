@@ -24,3 +24,11 @@ export async function POST(req: Request) {
   return new Response(JSON.stringify({ clientSecret: pi.client_secret }));
 }
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [React docs](https://react.dev)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

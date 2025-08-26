@@ -18,3 +18,13 @@ sections: [structure, boundaries, server-client-split]
 
 - Server components fetch data and compose UI; avoid client data fetching when possible.
 - Shared schemas/types in `/lib` safe for client.
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Architecture guidelines](https://nextjs.org/docs/architecture)
+- [Next.js docs](https://nextjs.org/docs)
+- [Next.js App Router docs](https://nextjs.org/docs/app)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+

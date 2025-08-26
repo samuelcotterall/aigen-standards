@@ -33,3 +33,11 @@ export default async function UserPage({ params }: { params: { id: string } }) {
 import { NextResponse } from "next/server";
 export async function GET() { return NextResponse.json([{ id: "1" }]); }
 ```
+
+## References / Validation
+
+The content in this document has been reviewed against authoritative sources:
+- [Next.js docs](https://nextjs.org/docs)
+
+_If you disagree with any recommendation, open an issue or PR with a clear rationale and references._
+
