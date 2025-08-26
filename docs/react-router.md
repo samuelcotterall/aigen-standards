@@ -1,20 +1,11 @@
 ---
 id: react-router
 title: React Router
-topics: [routing]
-scope: [react, vite]
-version: '>=6.4'
+topics: ["routing"]
+scope: ["react", "vite"]
+version: ">=6.4"
 sections:
-  [
-    conventions,
-    examples,
-    golden-rules,
-    route-module-anatomy,
-    router-setup,
-    patterns,
-    gotchas,
-    references,
-  ]
+  [conventions,examples,golden-rules,route-module-anatomy,router-setup,patterns,gotchas,references]
 ---
 
 # React Router — Conventions & Examples
