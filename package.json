@@ -3,11 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docs:ensure-frontmatter": "node scripts/ensure-frontmatter.js",
-    "docs:build-index": "node scripts/build-docs-index.js",
-    "docs:extract": "node scripts/extract-section.js"
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/scripts/build-docs-index.js",
+    "docs:ensure-frontmatter": "node dist/scripts/ensure-frontmatter.js",
+    "docs:build-index": "node dist/scripts/build-docs-index.js",
+    "docs:extract": "node dist/scripts/extract-section.js",
+    "docs:check-toc": "node dist/scripts/check-toc.js",
+    "dev:extract": "ts-node src/scripts/extract-section.ts"
   },
   "dependencies": {
     "semver": "^7.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.6",
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.5.1",
+    "@types/semver": "^7.3.12"
   }
 }
