@@ -1,5 +1,14 @@
 [
   {
+    "file": "docs/README.md",
+    "id": "README",
+    "title": "README",
+    "topics": [],
+    "scope": [],
+    "version": "any",
+    "sections": []
+  },
+  {
     "file": "docs/accessibility.md",
     "id": "accessibility-md",
     "title": "Accessibility — A11y Conventions for React/Next",
