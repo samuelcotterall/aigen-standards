@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { Buffer } from 'buffer';
 import { Octokit } from '@octokit/rest';
+import crypto from 'crypto';
 
 type FetchResult = { savedPath: string } | null;
 
@@ -99,15 +100,27 @@ export async function fetchAndCacheDoc(
       // optional: auto-commit the cached doc back to the repo and open a PR when requested
       try {
         if (process.env.EXTRACT_AUTO_COMMIT === '1' && token) {
-          const branchName = `docs-cache-${Date.now()}`;
-          logDebug('auto-commit enabled, creating branch', branchName);
+          // deterministic branch name per path: short sha1 of rel
+          const hash = crypto.createHash('sha1').update(rel).digest('hex').slice(0, 8);
+          const branchName = `docs-cache/${hash}`;
+          logDebug('auto-commit enabled, branch', branchName);
           const octokit = new Octokit({ auth: token });
           // get base branch sha
           const baseRef = await octokit.rest.git.getRef({ owner, repo, ref: `heads/${branch}` });
           const baseSha = baseRef.data.object.sha;
-          // create new branch
-          await octokit.rest.git.createRef({ owner, repo, ref: `refs/heads/${branchName}`, sha: baseSha });
-          // create or update file on new branch
+          // ensure branch exists (create if missing)
+          try {
+            await octokit.rest.git.getRef({ owner, repo, ref: `heads/${branchName}` });
+            logDebug('branch exists; reusing', branchName);
+          } catch (err: any) {
+            if (err && err.status === 404) {
+              await octokit.rest.git.createRef({ owner, repo, ref: `refs/heads/${branchName}`, sha: baseSha });
+              logDebug('created branch', branchName);
+            } else {
+              throw err;
+            }
+          }
+          // create or update file on branch
           const contentB64 = Buffer.from(content, 'utf8').toString('base64');
           await octokit.rest.repos.createOrUpdateFileContents({
             owner,
@@ -117,26 +130,26 @@ export async function fetchAndCacheDoc(
             content: contentB64,
             branch: branchName
           });
-          // create PR
-          const pr = await octokit.rest.pulls.create({
-            owner,
-            repo,
-            title: `chore(docs): cache ${rel}`,
-            head: branchName,
-            base: branch,
-            body: `Automated caching of ${rel}`
-          });
-          const prNumber = pr.data.number;
-          // optional reviewers and labels via env
+          // try to find existing open PR for this branch
+          const prs = await octokit.rest.pulls.list({ owner, repo, head: `${owner}:${branchName}`, base: branch, state: 'open' });
+          let prNumber: number | null = null;
+          if (prs.data && prs.data.length) {
+            prNumber = prs.data[0].number;
+            logDebug('found existing PR', prNumber);
+          } else {
+            const pr = await octokit.rest.pulls.create({ owner, repo, title: `chore(docs): cache ${rel}`, head: branchName, base: branch, body: `Automated caching of ${rel}` });
+            prNumber = pr.data.number;
+            logDebug('created PR', pr.data.html_url);
+          }
+          // optional reviewers and labels via event/env
           const reviewers = (process.env.EXTRACT_PR_REVIEWERS || '').split(',').map((s) => s.trim()).filter(Boolean);
-          if (reviewers.length) {
+          if (reviewers.length && prNumber) {
             await octokit.rest.pulls.requestReviewers({ owner, repo, pull_number: prNumber, reviewers });
           }
           const labels = (process.env.EXTRACT_PR_LABELS || '').split(',').map((s) => s.trim()).filter(Boolean);
-          if (labels.length) {
+          if (labels.length && prNumber) {
             await octokit.rest.issues.addLabels({ owner, repo, issue_number: prNumber, labels });
           }
-          logDebug('auto-commit PR created', pr.data.html_url);
         }
       } catch (e: any) {
         logDebug('auto-commit failed', e && e.message);
